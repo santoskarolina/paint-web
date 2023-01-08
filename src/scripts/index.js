@@ -1,36 +1,34 @@
-const drawCanvas = document.getElementById("draw__canvas")
+
+const canvas = document.getElementById("draw__canvas")
 const circleShape = document.getElementById("circle-shap")
 const colorInput = document.getElementById("color_input")
 const lineWidthInput = document.getElementById("lineWidth")
 const colorInputValue = document.getElementById("color_input_value")
 const sidebar = document.getElementById("sidebar")
-const eraser = document.getElementById("eraser")
 const eraserWidthInput = document.getElementById("eraser_width")
 const backgroundColorInput = document.getElementById("background_color_input")
 
-var ctx = drawCanvas.getContext('2d');
-var mouseTolerance = 5;
+const eraser = document.getElementById("eraser")
+const pencil = document.getElementById('pencil')
+
+var ctx = canvas.getContext('2d');
 
 resize();
 ctx.fillStyle = "#fff";
-ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-let isDraw = false;
-let isDrawingACircle = false;
-let eraserOn = false;
-let colorDraw = '#c0392b';
+let isDrawinging = false;
+let isErasing = false;
+let colorDraw = '#000';
 
 let lineWidth = 3;
 let eraserSize = 10;
 let mousePosition = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
-drawCanvas.addEventListener('mousedown', setPosition);
-drawCanvas.addEventListener('mouseenter', setPosition);
-drawCanvas.addEventListener('mousemove', selectAction);
-
-
-eraser.addEventListener('click', enableDeleteDraw);
+canvas.addEventListener('mousedown', setPosition);
+canvas.addEventListener('mouseenter', setPosition);
+canvas.addEventListener('mousemove', selectAction);
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
@@ -41,23 +39,24 @@ eraserWidthInput.addEventListener('change', (e) => {
     eraserSize = eraserWidthInput.value;
 });
 
-backgroundColorInput.addEventListener('change', changeCanvasBackgrounColor);
+backgroundColorInput.addEventListener('change', changeCanvasBackgrounColor)
 
-function changeCanvasBackgrounColor(){
+function changeCanvasBackgrounColor() {
+    document.getElementById('backgroundColorValue').textContent = backgroundColorInput.value
     ctx.fillStyle = backgroundColorInput.value;
-    ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function selectAction(e) {
-    if (eraserOn) {
+    if (isErasing) {
         deleteDraw(e)
-    } else if (isDraw) {
+    } else if (isDrawinging) {
         draw(e)
     }
 }
 
 function setPosition(e) {
-    const rect = drawCanvas.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
     mousePosition.x = e.clientX - rect.left;
     mousePosition.y = e.clientY - rect.top;
 }
@@ -87,51 +86,46 @@ function draw(e) {
 }
 
 
-function enablePencil(elementId) {
-    enableMouse(true)
-    changeCursorType("crosshair")
+function addStyleToSelectedOptionInMenu(elementId) {
     document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
 }
 
-function drawCircle(e) {
-}
+function changeCurrentMenuOption(optionToDraw) {
+    isDrawinging = optionToDraw;
+    isErasing = !optionToDraw;
 
-function enableDeleteDraw(event) {
-    enableMouse(false)
-    eraserOn = true;
-    isDraw = false;
+    const cursorType = optionToDraw ? "crosshair" : "default"
+    const idOfTheOptionSelectedInTheMenu = optionToDraw ? "pencil" : "eraser"
+
+    changeCursorType(cursorType)
+    addStyleToSelectedOptionInMenu(idOfTheOptionSelectedInTheMenu)
 }
 
 function deleteDraw(event) {
     if (event.buttons !== 1) return
 
-    changeCursorType('none')
     setPosition(event)
     ctx.clearRect(mousePosition.x, mousePosition.y, eraserSize, eraserSize);
 }
 
-function enableMouse(enable) {
-    isDraw = enable
-    isDrawingACircle = !enable;
-}
-
 function changeLineWidth(width) {
     lineWidth = width;
-    enablePencil('pencil')
 }
 
 function clearCanvas() {
-    ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    changeCanvasBackgrounColor()
 }
 
 function saveDraw() {
-    var canvasDataURL = drawCanvas.toDataURL();
+    var canvasDataURL = canvas.toDataURL();
     var a = document.createElement('a');
     a.href = canvasDataURL;
     a.download = 'drawing';
     a.click();
 }
 
-function changeCursorType(cursor){
+function changeCursorType(cursor) {
     document.body.style.cursor = cursor
 }

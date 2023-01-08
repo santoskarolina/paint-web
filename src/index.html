@@ -27,9 +27,9 @@
         <div class="sidebar__box">
             <h4>Fundo da tela</h4>
             <div class="sidebar__box__content">
-                <input type="color" value="rgb(255,255,255)" name="background_color" id="background_color_input">
+                <input type="color"  value="#ffffff" name="background_color" id="background_color_input">
                 <div class="sidebar__box__content_box">
-                    <p id="color_input_value">#fff</p>
+                    <p id="backgroundColorValue">#ffffff</p>
                 </div>
             </div>
         </div>
@@ -68,11 +68,11 @@
 
     <section class="floating__menu">
 
-        <div class="floating__menu-box" id="pencil" onclick="enablePencil('pencil')">
+        <div class="floating__menu-box" id="pencil" onclick="changeCurrentMenuOption(true)">
             <img src="./assets/icons/pencil-icon.png" alt="Pincel">
         </div>
 
-        <div class="floating__menu-box" id="eraser">
+        <div class="floating__menu-box" id="eraser" onclick="changeCurrentMenuOption(false)">
             <img src="./assets/icons/eraser.png" alt="Borracha">
         </div>
 
