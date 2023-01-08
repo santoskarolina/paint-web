@@ -25,6 +25,16 @@
         </div>
 
         <div class="sidebar__box">
+            <h4>Fundo da tela</h4>
+            <div class="sidebar__box__content">
+                <input type="color" value="rgb(255,255,255)" name="background_color" id="background_color_input">
+                <div class="sidebar__box__content_box">
+                    <p id="color_input_value">#fff</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar__box">
             <h4>Espessura do traço</h4>
             <div class="sidebar__box__content">
                 <div class="sidebar__box-lineWidth" onclick="changeLineWidth(3)">
@@ -43,7 +53,7 @@
 
         <div class="sidebar__box">
             <h4>Tamanho da borracha</h4>
-            <input type="range" name="eraser_width" id="eraser_width" min="10" max="50">
+            <input type="range" value="10" name="eraser_width" id="eraser_width" min="10" max="50">
         </div>
 
         <div class="sidebar__box">
@@ -59,19 +69,19 @@
     <section class="floating__menu">
 
         <div class="floating__menu-box" id="pencil" onclick="enablePencil('pencil')">
-            <img src="./assets/icons/pencil-icon.png" alt="Pencil">
+            <img src="./assets/icons/pencil-icon.png" alt="Pincel">
         </div>
 
         <div class="floating__menu-box" id="eraser">
-            <img src="./assets/icons/eraser.png" alt="Pencil">
+            <img src="./assets/icons/eraser.png" alt="Borracha">
         </div>
 
         <div class="floating__menu-box" id="paint-bucket" onclick="fillRect()">
-            <img src="./assets/icons/paint-bucket.png" alt="Pencil">
+            <img src="./assets/icons/paint-bucket.png" alt="Balde de tinta">
         </div>
 
         <div class="floating__menu-box" id="paint-bucket" onclick="clearCanvas()">
-            <img src="./assets/icons/botao-apagar.png" alt="Pencil">
+            <img src="./assets/icons/botao-apagar.png" alt="Apagar desenho">
         </div>
         
         <div class="floating__menu-box" id="paint-bucket" onclick="saveDraw()">
@@ -84,6 +94,5 @@
     </div>
     
     <script src="./scripts/index.js"></script>
-
 </body>
 </html>

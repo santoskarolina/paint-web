@@ -6,6 +6,7 @@ const colorInputValue = document.getElementById("color_input_value")
 const sidebar = document.getElementById("sidebar")
 const eraser = document.getElementById("eraser")
 const eraserWidthInput = document.getElementById("eraser_width")
+const backgroundColorInput = document.getElementById("background_color_input")
 
 var ctx = drawCanvas.getContext('2d');
 var mouseTolerance = 5;
@@ -18,6 +19,7 @@ let isDraw = false;
 let isDrawingACircle = false;
 let eraserOn = false;
 let colorDraw = '#c0392b';
+
 let lineWidth = 3;
 let eraserSize = 10;
 let mousePosition = { x: 0, y: 0 };
@@ -39,6 +41,13 @@ eraserWidthInput.addEventListener('change', (e) => {
     eraserSize = eraserWidthInput.value;
 });
 
+backgroundColorInput.addEventListener('change', changeCanvasBackgrounColor);
+
+function changeCanvasBackgrounColor(){
+    ctx.fillStyle = backgroundColorInput.value;
+    ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
+}
+
 function selectAction(e) {
     if (eraserOn) {
         deleteDraw(e)
@@ -46,7 +55,6 @@ function selectAction(e) {
         draw(e)
     }
 }
-
 
 function setPosition(e) {
     const rect = drawCanvas.getBoundingClientRect();
@@ -57,6 +65,7 @@ function setPosition(e) {
 function resize() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
+    changeCanvasBackgrounColor()
 }
 
 function draw(e) {
@@ -96,6 +105,7 @@ function enableDeleteDraw(event) {
 function deleteDraw(event) {
     if (event.buttons !== 1) return
 
+    changeCursorType('none')
     setPosition(event)
     ctx.clearRect(mousePosition.x, mousePosition.y, eraserSize, eraserSize);
 }
