@@ -95,3 +95,29 @@ header{
     height: 100%;
     width: 100%;
 }
+
+
+.floating__menu{
+    background-color: rgb(226, 202, 202);
+    color: #fff;
+    position: absolute;
+    border-radius: 2rem;
+    right: 0;
+    top: 0;
+    width: 20rem;
+    height: 4rem;
+    padding: 1rem;
+    z-index: 1000;
+    margin: 1.2rem 1rem 0 0;
+
+    display: flex;
+}
+
+.floating__menu-box {
+    cursor: pointer;
+}
+
+.floating__menu-box img{
+    width: 2rem;
+    margin-right: 1rem;
+}
