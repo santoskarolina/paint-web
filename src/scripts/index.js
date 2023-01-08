@@ -4,8 +4,10 @@ const colorInput = document.getElementById("color_input")
 const lineWidthInput = document.getElementById("lineWidth")
 
 var ctx = drawCanvas.getContext('2d');
-resize();
 
+resize();
+ctx.fillStyle = "#fff";
+ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 
 let isDrawingOnMouse = false;
 let isDrawingACircle = false;
@@ -86,4 +88,13 @@ function enableMouse(enable){
 
 function clearCanvas(){
     ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+}
+
+
+function saveDraw(){
+    var canvasDataURL = drawCanvas.toDataURL();
+    var a = document.createElement('a');
+    a.href = canvasDataURL;
+    a.download = 'drawing';
+    a.click();
 }
