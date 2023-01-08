@@ -2,8 +2,12 @@ const drawCanvas = document.getElementById("draw__canvas")
 const circleShape = document.getElementById("circle-shap")
 const colorInput = document.getElementById("color_input")
 const lineWidthInput = document.getElementById("lineWidth")
+const colorInputValue = document.getElementById("color_input_value")
+const sidebar = document.getElementById("sidebar")
 
 var ctx = drawCanvas.getContext('2d');
+
+var canvasWidth = drawCanvas.width, canvasheight = drawCanvas.height
 
 resize();
 ctx.fillStyle = "#fff";
@@ -12,8 +16,7 @@ ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 let isDrawingOnMouse = false;
 let isDrawingACircle = false;
 let colorDraw = '#c0392b';
-let lineWidth = 5;
-
+let lineWidth = 3;
 
 var mousePosition = { x: 0, y: 0 };
 
@@ -22,15 +25,12 @@ document.addEventListener('mousedown', setPosition);
 document.addEventListener('mouseenter', setPosition);
 document.addEventListener('mousemove', drawing);
 
-// circleShape.addEventListener('click', enableMouseMove);
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
+    colorInputValue.textContent = colorInput.value
 });
 
-lineWidthInput.addEventListener('change', (e) => {
-    lineWidth = lineWidthInput.value;
-});
 
 function setPosition(e) {
     mousePosition.x = e.clientX;
@@ -86,10 +86,14 @@ function enableMouse(enable){
     isDrawingACircle = !enable;
 }
 
+function changeLineWidth(width){
+    lineWidth = width;
+    enablePencil('pencil')
+}
+
 function clearCanvas(){
     ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 }
-
 
 function saveDraw(){
     var canvasDataURL = drawCanvas.toDataURL();
@@ -97,4 +101,7 @@ function saveDraw(){
     a.href = canvasDataURL;
     a.download = 'drawing';
     a.click();
+}
+
+function fillRect(){
 }
