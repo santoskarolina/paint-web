@@ -5,6 +5,7 @@ const lineWidthInput = document.getElementById("lineWidth")
 const colorInputValue = document.getElementById("color_input_value")
 const sidebar = document.getElementById("sidebar")
 const eraser = document.getElementById("eraser")
+const eraserWidthInput = document.getElementById("eraser_width")
 
 var ctx = drawCanvas.getContext('2d');
 var mouseTolerance = 5;
@@ -18,6 +19,7 @@ let isDrawingACircle = false;
 let eraserOn = false;
 let colorDraw = '#c0392b';
 let lineWidth = 3;
+let eraserSize = 10;
 let mousePosition = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
@@ -31,6 +33,10 @@ eraser.addEventListener('click', enableDeleteDraw);
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
     colorInputValue.textContent = colorInput.value
+});
+
+eraserWidthInput.addEventListener('change', (e) => {
+    eraserSize = eraserWidthInput.value;
 });
 
 function selectAction(e) {
@@ -74,7 +80,7 @@ function draw(e) {
 
 function enablePencil(elementId) {
     enableMouse(true)
-    document.body.style.cursor = "crosshair"
+    changeCursorType("crosshair")
     document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
 }
 
@@ -88,13 +94,10 @@ function enableDeleteDraw(event) {
 }
 
 function deleteDraw(event) {
-
-    if (event.buttons !== 1) {
-        return
-    };
+    if (event.buttons !== 1) return
 
     setPosition(event)
-    ctx.clearRect(mousePosition.x, mousePosition.y, 10, 10);
+    ctx.clearRect(mousePosition.x, mousePosition.y, eraserSize, eraserSize);
 }
 
 function enableMouse(enable) {
@@ -117,4 +120,8 @@ function saveDraw() {
     a.href = canvasDataURL;
     a.download = 'drawing';
     a.click();
+}
+
+function changeCursorType(cursor){
+    document.body.style.cursor = cursor
 }
