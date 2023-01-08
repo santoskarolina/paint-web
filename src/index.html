@@ -9,25 +9,41 @@
 </head>
 <body>
 
-    <section class="sidebar">
-
+    <section class="sidebar" id="sidebar">
         <div>
             <h1>Web Drawing</h1>
         </div>
         
         <div class="sidebar__box">
-            <label for="color">Cor</label>
-            <input type="color" name="color" id="color_input">
+            <h4>Cor</h4>
+            <div class="sidebar__box__content">
+                <input type="color" name="color" id="color_input">
+                <div class="sidebar__box__content_box">
+                    <p id="color_input_value">#0000</p>
+                </div>
+            </div>
         </div>
 
         <div class="sidebar__box">
-            <label for="stroke">Espessura da linha</label>
-            <input type="number" name="stroke" id="lineWidth" value="5" minlength="1">
+            <h4>Espessura do traço</h4>
+            <div class="sidebar__box__content">
+                <div class="sidebar__box-lineWidth" onclick="changeLineWidth(3)">
+                    <div id="lineWidth-One"></div>
+                </div>
+
+                <div class="sidebar__box-lineWidth"  onclick="changeLineWidth(5)">
+                    <div id="lineWidth-Two"></div>
+                </div>
+
+                <div class="sidebar__box-lineWidth"  onclick="changeLineWidth(10)">
+                    <div id="lineWidth-three"></div>
+                </div>
+            </div>
         </div>
 
         <div class="sidebar__box">
-            <p>Formas</p>
-            <div class="sidebar__box-shapes">
+            <h4>Formas</h4>
+            <div class="sidebar__box__content">
                 <div class="sidebar__box-circle-shape" id="circle-shap"></div>
                 <div class="sidebar__box-rectangle-shape"></div>
                 <div class="sidebar__box-triangle-shape"></div>
@@ -45,14 +61,13 @@
             <img src="./assets/icons/eraser.png" alt="Pencil">
         </div>
 
-        <div class="floating__menu-box" id="paint-bucket">
+        <div class="floating__menu-box" id="paint-bucket" onclick="fillRect()">
             <img src="./assets/icons/paint-bucket.png" alt="Pencil">
         </div>
 
         <div class="floating__menu-box" id="paint-bucket" onclick="clearCanvas()">
             <img src="./assets/icons/botao-apagar.png" alt="Pencil">
         </div>
-
         
         <div class="floating__menu-box" id="paint-bucket" onclick="saveDraw()">
             <img src="./assets/icons/baixar.png" alt="Pencil">
