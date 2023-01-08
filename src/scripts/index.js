@@ -115,6 +115,7 @@ function deleteDraw(event) {
 
 function changeLineWidth(width) {
     lineWidth = width;
+    changeCurrentMenuOption(true)
 }
 
 function clearCanvas() {
