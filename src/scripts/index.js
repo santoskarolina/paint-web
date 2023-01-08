@@ -4,37 +4,48 @@ const colorInput = document.getElementById("color_input")
 const lineWidthInput = document.getElementById("lineWidth")
 const colorInputValue = document.getElementById("color_input_value")
 const sidebar = document.getElementById("sidebar")
+const eraser = document.getElementById("eraser")
 
 var ctx = drawCanvas.getContext('2d');
-
-var canvasWidth = drawCanvas.width, canvasheight = drawCanvas.height
+var mouseTolerance = 5;
 
 resize();
 ctx.fillStyle = "#fff";
 ctx.fillRect(0, 0, drawCanvas.width, drawCanvas.height);
 
-let isDrawingOnMouse = false;
+let isDraw = false;
 let isDrawingACircle = false;
+let eraserOn = false;
 let colorDraw = '#c0392b';
 let lineWidth = 3;
-
-var mousePosition = { x: 0, y: 0 };
+let mousePosition = { x: 0, y: 0 };
 
 window.addEventListener('resize', resize);
-document.addEventListener('mousedown', setPosition);
-document.addEventListener('mouseenter', setPosition);
-document.addEventListener('mousemove', drawing);
+drawCanvas.addEventListener('mousedown', setPosition);
+drawCanvas.addEventListener('mouseenter', setPosition);
+drawCanvas.addEventListener('mousemove', selectAction);
 
+
+eraser.addEventListener('click', enableDeleteDraw);
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
     colorInputValue.textContent = colorInput.value
 });
 
+function selectAction(e) {
+    if (eraserOn) {
+        deleteDraw(e)
+    } else if (isDraw) {
+        draw(e)
+    }
+}
+
 
 function setPosition(e) {
-    mousePosition.x = e.clientX;
-    mousePosition.y = e.clientY;
+    const rect = drawCanvas.getBoundingClientRect();
+    mousePosition.x = e.clientX - rect.left;
+    mousePosition.y = e.clientY - rect.top;
 }
 
 function resize() {
@@ -42,31 +53,24 @@ function resize() {
     ctx.canvas.height = window.innerHeight;
 }
 
-function drawing(e) {
-    if (isDrawingOnMouse) {
-        draw(e)
-    } else {
-        drawCircle(e)
-    }
-}
-
 function draw(e) {
-    if (e.buttons !== 1) return;
+    if (e.buttons !== 1) {
+        return
+    };
 
-    if (isDrawingOnMouse) {
-        ctx.beginPath(); // start
+    ctx.beginPath(); // start
 
-        ctx.lineWidth = lineWidth;
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = colorDraw;
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = colorDraw;
 
-        ctx.moveTo(mousePosition.x, mousePosition.y); // start
-        setPosition(e);
-        ctx.lineTo(mousePosition.x, mousePosition.y); // end
+    ctx.moveTo(mousePosition.x, mousePosition.y); // start
+    setPosition(e);
+    ctx.lineTo(mousePosition.x, mousePosition.y); // end
 
-        ctx.stroke(); // draw
-    }
+    ctx.stroke(); // draw
 }
+
 
 function enablePencil(elementId) {
     enableMouse(true)
@@ -77,31 +81,40 @@ function enablePencil(elementId) {
 function drawCircle(e) {
 }
 
-function deleteDrawing(e){
+function enableDeleteDraw(event) {
     enableMouse(false)
+    eraserOn = true;
+    isDraw = false;
 }
 
-function enableMouse(enable){
-    isDrawingOnMouse = enable
+function deleteDraw(event) {
+
+    if (event.buttons !== 1) {
+        return
+    };
+
+    setPosition(event)
+    ctx.clearRect(mousePosition.x, mousePosition.y, 10, 10);
+}
+
+function enableMouse(enable) {
+    isDraw = enable
     isDrawingACircle = !enable;
 }
 
-function changeLineWidth(width){
+function changeLineWidth(width) {
     lineWidth = width;
     enablePencil('pencil')
 }
 
-function clearCanvas(){
+function clearCanvas() {
     ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 }
 
-function saveDraw(){
+function saveDraw() {
     var canvasDataURL = drawCanvas.toDataURL();
     var a = document.createElement('a');
     a.href = canvasDataURL;
     a.download = 'drawing';
     a.click();
-}
-
-function fillRect(){
 }
