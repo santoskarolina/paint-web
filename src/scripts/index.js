@@ -87,6 +87,11 @@ function draw(e) {
 
 
 function addStyleToSelectedOptionInMenu(elementId) {
+    const thereIsAnExistingClass = document.querySelector(".floating__menu-box-select")
+    if(thereIsAnExistingClass){
+        thereIsAnExistingClass.classList.remove('floating__menu-box-select')
+    }
+    
     document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
 }
 
