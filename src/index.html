@@ -10,6 +10,10 @@
 <body>
 
     <section class="sidebar">
+
+        <div>
+            <h1>Web Drawing</h1>
+        </div>
         
         <div class="sidebar__box">
             <label for="color">Cor</label>
@@ -32,16 +36,21 @@
     </section>
 
     <section class="floating__menu">
-        <div class="floating__menu-box">
+
+        <div class="floating__menu-box" id="pencil" onclick="enablePencil('pencil')">
             <img src="./assets/icons/pencil-icon.png" alt="Pencil">
         </div>
 
-        <div class="floating__menu-box">
+        <div class="floating__menu-box" id="eraser" onclick="deleteDrawing()">
             <img src="./assets/icons/eraser.png" alt="Pencil">
         </div>
 
-        <div class="floating__menu-box">
+        <div class="floating__menu-box" id="paint-bucket">
             <img src="./assets/icons/paint-bucket.png" alt="Pencil">
+        </div>
+
+        <div class="floating__menu-box" id="paint-bucket" onclick="clearCanvas()">
+            <img src="./assets/icons/botao-apagar.png" alt="Pencil">
         </div>
     </section>
 

@@ -7,7 +7,7 @@ var ctx = drawCanvas.getContext('2d');
 resize();
 
 
-let isDrawingOnMouse = true;
+let isDrawingOnMouse = false;
 let isDrawingACircle = false;
 let colorDraw = '#c0392b';
 let lineWidth = 5;
@@ -20,7 +20,7 @@ document.addEventListener('mousedown', setPosition);
 document.addEventListener('mouseenter', setPosition);
 document.addEventListener('mousemove', drawing);
 
-circleShape.addEventListener('click', enableMouseMove);
+// circleShape.addEventListener('click', enableMouseMove);
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
@@ -66,10 +66,24 @@ function draw(e) {
     }
 }
 
-function enableMouseMove() {
-    isDrawingACircle = true;
-    isDrawingOnMouse = false
+function enablePencil(elementId) {
+    enableMouse(true)
+    document.body.style.cursor = "crosshair"
+    document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
 }
 
 function drawCircle(e) {
+}
+
+function deleteDrawing(e){
+    enableMouse(false)
+}
+
+function enableMouse(enable){
+    isDrawingOnMouse = enable
+    isDrawingACircle = !enable;
+}
+
+function clearCanvas(){
+    ctx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
 }
