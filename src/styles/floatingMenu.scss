@@ -1,0 +1,34 @@
+.floating__menu__container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.floating__menu{
+    background-color: rgb(119, 110, 110);
+    color: #fff;
+    border-radius: 2rem;
+    width: 20rem;
+    height: 4rem;
+    padding: 0.6rem;
+    margin: 1.2rem 1rem 0 0;
+    display: flex;
+}
+
+.floating__menu-box {
+    cursor: pointer;
+    border-radius: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    width: 6rem;
+}
+
+.floating__menu-box img{
+    height: 100%
+}
+
+.floating__menu-box-select{
+    background-color: rgb(120, 201, 221);
+}
