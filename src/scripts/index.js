@@ -1,17 +1,13 @@
 
+
 const canvas = document.getElementById("draw__canvas")
-const circleShape = document.getElementById("circle-shap")
 const colorInput = document.getElementById("color_input")
-const lineWidthInput = document.getElementById("lineWidth")
 const colorInputValue = document.getElementById("color_input_value")
 const sidebar = document.getElementById("sidebar")
 const eraserWidthInput = document.getElementById("eraser_width")
 const backgroundColorInput = document.getElementById("background_color_input")
 const mousePositionText = document.querySelector('.mouse__position')
-const floatingMenu = document.getElementById('floating__menu')
 
-const eraser = document.getElementById("eraser")
-const pencil = document.getElementById('pencil')
 
 var ctx = canvas.getContext('2d');
 
