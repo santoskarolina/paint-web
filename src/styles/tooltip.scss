@@ -15,10 +15,17 @@
   
     font-size: 1rem;
     display: none;
-    left: 0.1rem;
-    top: 3rem
+    top: 3rem;
   }
 
+  .left{
+    left: 0.4rem;
+  }
+
+  .right{
+    right:  0.4rem;
+  }
+  
   &:hover .tooltipContent {
     display: block;
   }
