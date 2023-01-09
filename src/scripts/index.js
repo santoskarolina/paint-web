@@ -8,6 +8,7 @@ const sidebar = document.getElementById("sidebar")
 const eraserWidthInput = document.getElementById("eraser_width")
 const backgroundColorInput = document.getElementById("background_color_input")
 const mousePositionText = document.querySelector('.mouse__position')
+const floatingMenu = document.getElementById('floating__menu')
 
 const eraser = document.getElementById("eraser")
 const pencil = document.getElementById('pencil')
@@ -18,7 +19,7 @@ resize();
 ctx.fillStyle = "#fff";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-let isDrawinging = false;
+let isDrawinging = true;
 let isDrawingingACircle = false;
 let isDragingObject = false;
 let isErasing = false;
@@ -45,9 +46,15 @@ canvas.addEventListener('mousemove', (e)=> {
     selectAction(e)
 });
 
+
+
 sidebar.addEventListener('mousemove', (e)=> {
     changeCursorType('default')
 });
+
+// floatingMenu.addEventListener('mousemove', (e)=> {
+//     changeCursorType('default')
+// });
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
