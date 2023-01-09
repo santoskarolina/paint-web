@@ -41,7 +41,12 @@ canvas.addEventListener('mousedown', (e) => {
 canvas.addEventListener('mouseenter', setPosition);
 canvas.addEventListener('mousemove', (e)=> {
     mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
+    changeCursorType('crosshair')
     selectAction(e)
+});
+
+sidebar.addEventListener('mousemove', (e)=> {
+    changeCursorType('default')
 });
 
 colorInput.addEventListener('change', (e) => {
@@ -73,7 +78,6 @@ function setPosition(e) {
     const rect = canvas.getBoundingClientRect();
     mousePosition.x = e.clientX - rect.left;
     mousePosition.y = e.clientY - rect.top;
-
 }
 
 function resize() {
@@ -122,11 +126,8 @@ function addStyleToSelectedOptionInMenu(elementId) {
 function changeCurrentMenuOption(optionToDraw) {
     isDrawinging = optionToDraw;
     isErasing = !optionToDraw;
-
-    const cursorType = optionToDraw ? "crosshair" : "default"
     const idOfTheOptionSelectedInTheMenu = optionToDraw ? "pencil" : "eraser"
 
-    changeCursorType(cursorType)
     addStyleToSelectedOptionInMenu(idOfTheOptionSelectedInTheMenu)
 }
 
@@ -172,4 +173,4 @@ function handleMouseDown(e){
     startX=parseInt(e.clientX-mousePosition.x);
     startY=parseInt(e.clientY-mousePosition.y);
     isDown=true;
-  }
+}
