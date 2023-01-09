@@ -29,7 +29,7 @@ header{
     position: absolute;
     left: 0;
     top: 0;
-    width: 16rem;
+    width: 14rem;
     height: 100vh;
     padding: 1rem;
     z-index: 1000;
@@ -182,4 +182,23 @@ p{
 
 .floating__menu-box-select{
     background-color: rgb(120, 201, 221);
+}
+
+.footer__container{
+    background-color: #333;
+    box-shadow: 0px 0px 10px rgba(30, 30, 30, 0.7);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2rem;
+    padding: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.footer__content{
+    padding: 1rem;
+    color: #fff;
 }

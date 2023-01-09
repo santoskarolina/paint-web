@@ -59,8 +59,8 @@
         <div class="sidebar__box">
             <h4>Formas</h4>
             <div class="sidebar__box__content">
-                <div class="sidebar__box-circle-shape" id="circle-shap"></div>
-                <div class="sidebar__box-rectangle-shape"></div>
+                <div class="sidebar__box-circle-shape" id="circle-shap" onclick="drawCircle()"></div>
+                <div class="sidebar__box-rectangle-shape" onclick="drawRectangle()"></div>
                 <div class="sidebar__box-triangle-shape"></div>
             </div>
         </div>
@@ -91,6 +91,12 @@
 
     <div class="draw__area">
         <canvas class="draw__canvas" id="draw__canvas"></canvas>
+    </div>
+
+    <div class="footer__container">
+        <div class="footer__content">
+            <p class="mouse__position"></p>
+        </div>
     </div>
     
     <script src="./scripts/index.js"></script>

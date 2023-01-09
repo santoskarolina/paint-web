@@ -7,6 +7,7 @@ const colorInputValue = document.getElementById("color_input_value")
 const sidebar = document.getElementById("sidebar")
 const eraserWidthInput = document.getElementById("eraser_width")
 const backgroundColorInput = document.getElementById("background_color_input")
+const mousePositionText = document.querySelector('.mouse__position')
 
 const eraser = document.getElementById("eraser")
 const pencil = document.getElementById('pencil')
@@ -18,6 +19,8 @@ ctx.fillStyle = "#fff";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 let isDrawinging = false;
+let isDrawingingACircle = false;
+let isDragingObject = false;
 let isErasing = false;
 let colorDraw = '#000';
 
@@ -25,10 +28,21 @@ let lineWidth = 3;
 let eraserSize = 10;
 let mousePosition = { x: 0, y: 0 };
 
+var startX;
+var startY;
+var isDown=false;
+
+
 window.addEventListener('resize', resize);
-canvas.addEventListener('mousedown', setPosition);
+canvas.addEventListener('mousedown', (e) => {
+    handleMouseDown(e)
+    setPosition(e)
+});
 canvas.addEventListener('mouseenter', setPosition);
-canvas.addEventListener('mousemove', selectAction);
+canvas.addEventListener('mousemove', (e)=> {
+    mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
+    selectAction(e)
+});
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
@@ -59,6 +73,7 @@ function setPosition(e) {
     const rect = canvas.getBoundingClientRect();
     mousePosition.x = e.clientX - rect.left;
     mousePosition.y = e.clientY - rect.top;
+
 }
 
 function resize() {
@@ -85,6 +100,15 @@ function draw(e) {
     ctx.stroke(); // draw
 }
 
+function drawCircle(){
+    ctx.beginPath();
+    ctx.arc(400, 75, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+}
+
+function drawRectangle(){
+		
+}
 
 function addStyleToSelectedOptionInMenu(elementId) {
     const thereIsAnExistingClass = document.querySelector(".floating__menu-box-select")
@@ -135,3 +159,17 @@ function saveDraw() {
 function changeCursorType(cursor) {
     document.body.style.cursor = cursor
 }
+
+function selectDrawCircle(){
+    isDrawinging = false;
+    isDrawingingACircle = true;
+    isErasing = false
+}
+
+function handleMouseDown(e){
+    e.preventDefault();
+    e.stopPropagation();
+    startX=parseInt(e.clientX-mousePosition.x);
+    startY=parseInt(e.clientY-mousePosition.y);
+    isDown=true;
+  }
