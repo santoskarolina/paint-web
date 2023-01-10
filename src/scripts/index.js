@@ -6,7 +6,7 @@ export const eraserWidthInput = document.getElementById("eraser_width")
 export const mousePositionText = document.querySelector('.mouse__position')
 export const toolbar = document.getElementById('toolbar')
 
-const lineWidthThree = document.getElementById("lineWidthTen")
+const lineWidthThree = document.getElementById("lineWidthThree")
 const lineWidthFive = document.getElementById("lineWidthFive")
 const lineWidthTen = document.getElementById("lineWidthTen")
 
@@ -68,7 +68,7 @@ export function addEventToLine(){
         lineWidthTen.addEventListener('click', (e) => {
             changeLineWidth(10);
         });
-    }, 500)
+    }, 200)
 }
 
 // function changeCanvasBackgrounColor() {
