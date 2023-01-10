@@ -37,3 +37,24 @@ header{
 p{
     margin: 0 !important;
 }
+
+.showDrawTextContainer{
+    transform-origin: 0px 0px 0px;
+    position: absolute;
+    overflow: hidden;
+    resize: none;
+    display: none;
+    outline: none;
+    border: 1px solid #eee;
+    z-index: 1000;
+    font-family: "Roboto Mono";
+    width: 14rem;
+    height: 57.6px;
+    font-size: 2rem;
+    color: rgb(0, 0, 0);
+    line-height: 1.209;
+    white-space: nowrap;
+    padding: 0px;
+    transform: matrix(1, 0, 0, 1, 458, 590);
+
+}

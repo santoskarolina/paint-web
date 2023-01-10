@@ -1,3 +1,5 @@
+import { setPositionOfTextArea } from "./drawShapes"
+
 export const canvas = document.getElementById("draw__canvas")
 
 export const colorInput = document.getElementById("color_input")
@@ -16,12 +18,13 @@ export var ctx = canvas.getContext('2d');
 resize();
 
 let isDrawinging = true;
+let istypping = false;
 let isErasing = false;
-let colorDraw = '#000';
+export let colorDraw = '#000';
 
 let lineWidth = 3;
 let eraserSize = 10;
-let mousePosition = { x: 0, y: 0 };
+export let mousePosition = { x: 0, y: 0 };
 
 var startX;
 var startY;
@@ -40,6 +43,14 @@ canvas.addEventListener('mousemove', (e)=> {
     mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
     changeCursorType('crosshair')
     selectAction(e)
+});
+
+canvas.addEventListener('click', (e)=> {
+    
+    if(istypping){
+        setPosition(e)
+        setPositionOfTextArea(e)
+    }
 });
 
 toolbar.addEventListener('mousemove', (e)=> {
@@ -84,6 +95,7 @@ function selectAction(e) {
         draw(e)
     }
 }
+
 
 function setPosition(e) {
     const rect = canvas.getBoundingClientRect();
@@ -136,10 +148,21 @@ function addStyleToSelectedOptionInMenu(elementId) {
 export function changeCurrentMenuOption(optionToDraw) {
     isDrawinging = optionToDraw;
     isErasing = !optionToDraw;
+    istypping = !optionToDraw
     const idOfTheOptionSelectedInTheMenu = optionToDraw ? "pencil" : "eraser"
 
     addStyleToSelectedOptionInMenu(idOfTheOptionSelectedInTheMenu)
 }
+
+export function changeToTypeText(optionToDraw) {
+    isDrawinging = !optionToDraw;
+    isErasing = !optionToDraw;
+    istypping = optionToDraw
+    const idOfTheOptionSelectedInTheMenu = optionToDraw ? "pencil" : "eraser"
+
+    addStyleToSelectedOptionInMenu(idOfTheOptionSelectedInTheMenu)
+}
+
 
 function deleteDraw(event) {
     if (event.buttons !== 1) return
