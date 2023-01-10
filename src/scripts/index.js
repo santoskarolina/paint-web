@@ -1,4 +1,4 @@
-import { setPositionOfTextArea } from "./drawShapes"
+import { drawCircle, drawRect, drawTriangle } from "./drawShapes"
 
 export const canvas = document.getElementById("draw__canvas")
 
@@ -8,91 +8,49 @@ export const eraserWidthInput = document.getElementById("eraser_width")
 export const mousePositionText = document.querySelector('.mouse__position')
 export const toolbar = document.getElementById('toolbar')
 
-const lineWidthThree = document.getElementById("lineWidthThree")
-const lineWidthFive = document.getElementById("lineWidthFive")
-const lineWidthTen = document.getElementById("lineWidthTen")
+const lineWidthBox = document.querySelectorAll(".sidebar__box-lineWidth")
+const saveImageButton = document.getElementById('save-draw')
+const toolBtns = document.querySelectorAll(".tool")
 
-export var currentToolbarOption = '';
 
+export let prevMouseX, prevMouseY, snapshot;
+export var selectedTool = "pencil"
 export var ctx = canvas.getContext('2d');
-resize();
 
-let isDrawinging = true;
-let istypping = false;
-let isErasing = false;
+window.addEventListener("load", () => {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+});
+
+let isDrawing = false;
 export let colorDraw = '#000';
 
 let lineWidth = 3;
 let eraserSize = 10;
 export let mousePosition = { x: 0, y: 0 };
 
-var startX;
-var startY;
-var isDown=false;
-
 window.addEventListener('resize', resize);
 
-canvas.addEventListener('mousedown', (e) => {
-    handleMouseDown(e)
-    setPosition(e)
-});
 
-canvas.addEventListener('mouseenter', setPosition);
-
-canvas.addEventListener('mousemove', (e)=> {
-    mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
-    changeCursorType('crosshair')
-    selectAction(e)
-});
-
-canvas.addEventListener('click', (e)=> {
-    
-    if(istypping){
-        setPosition(e)
-        setPositionOfTextArea(e)
-    }
-});
-
-toolbar.addEventListener('mousemove', (e)=> {
-    changeCursorType('default')
-});
-
-colorInput.addEventListener('change', (e) => {
-    colorDraw = colorInput.value;
-    colorInputValue.textContent = colorInput.value
-});
-
-eraserWidthInput.addEventListener('change', (e) => {
-    eraserSize = eraserWidthInput.value;
-});
-
-export function addEventToLine(){
-    setTimeout(() => {
-        lineWidthThree.addEventListener('click', (e) => {
-            changeLineWidth(3);
-        });
-        
-        lineWidthFive.addEventListener('click', (e) => {
-            changeLineWidth(5);
-        })
-        
-        lineWidthTen.addEventListener('click', (e) => {
-            changeLineWidth(10);
-        });
-    }, 200)
-}
-
-// function changeCanvasBackgrounColor() {
-//     document.getElementById('backgroundColorValue').textContent = backgroundColorInput.value
-//     ctx.fillStyle = backgroundColorInput.value;
-//     ctx.fillRect(0, 0, canvas.width, canvas.height);
-// }
+lineWidthBox.forEach(element => {
+    element.addEventListener('click', (e) => {
+        lineWidth = element.id;
+    });
+})
 
 function selectAction(e) {
-    if (isErasing) {
-        deleteDraw(e)
-    } else if (isDrawinging) {
-        draw(e)
+    if(!isDrawing) return;
+
+    if(selectedTool === "circle"){
+        drawCircle(e);
+    }else if(selectedTool == "pencil" || selectedTool === "eraser"){
+        ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : colorInput;
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke(); 
+    }else if(selectedTool === "rectangle"){
+        drawRect(e);
+    } else {
+        drawTriangle(e);
     }
 }
 
@@ -108,34 +66,6 @@ function resize() {
     ctx.canvas.height = window.innerHeight;
 }
 
-function draw(e) {
-    if (e.buttons !== 1) {
-        return
-    };
-
-        ctx.beginPath(); // start
-    
-        ctx.lineWidth = lineWidth;
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = colorDraw;
-    
-        ctx.moveTo(mousePosition.x, mousePosition.y); // start
-        setPosition(e);
-        ctx.lineTo(mousePosition.x, mousePosition.y); // end
-    
-        ctx.stroke(); // draw
-}
-
-function drawCircle(){
-    ctx.beginPath();
-    ctx.arc(400, 75, 50, 0, 2 * Math.PI);
-    ctx.stroke();
-}
-
-function drawRectangle(){
-		
-}
-
 function addStyleToSelectedOptionInMenu(elementId) {
     const thereIsAnExistingClass = document.querySelector(".floating__menu-box-select")
     if(thereIsAnExistingClass){
@@ -143,24 +73,6 @@ function addStyleToSelectedOptionInMenu(elementId) {
     }
     
     document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
-}
-
-export function changeCurrentMenuOption(optionToDraw) {
-    isDrawinging = optionToDraw;
-    isErasing = !optionToDraw;
-    istypping = !optionToDraw
-    const idOfTheOptionSelectedInTheMenu = optionToDraw ? "pencil" : "eraser"
-
-    addStyleToSelectedOptionInMenu(idOfTheOptionSelectedInTheMenu)
-}
-
-export function changeToTypeText(optionToDraw) {
-    isDrawinging = !optionToDraw;
-    isErasing = !optionToDraw;
-    istypping = optionToDraw
-    const idOfTheOptionSelectedInTheMenu = optionToDraw ? "pencil" : "eraser"
-
-    addStyleToSelectedOptionInMenu(idOfTheOptionSelectedInTheMenu)
 }
 
 
@@ -171,26 +83,57 @@ function deleteDraw(event) {
     ctx.clearRect(mousePosition.x, mousePosition.y, eraserSize, eraserSize);
 }
 
-function changeLineWidth(width) {
-    lineWidth = width;
-    changeCurrentMenuOption(true)
-}
-
 function changeCursorType(cursor) {
     document.body.style.cursor = cursor
 }
 
-function selectDrawCircle(){
-    isDrawinging = false;
-    isDrawingingACircle = true;
-    isErasing = false
+const startDraw = (e) => {
+    isDrawing = true;
+    prevMouseX = e.offsetX; 
+    prevMouseY = e.offsetY; 
+    ctx.beginPath();
+    ctx.lineWidth = lineWidth; 
+    ctx.strokeStyle = colorInput;
+    ctx.fillStyle = colorInput;
+    snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 
-function handleMouseDown(e){
-    e.preventDefault();
-    e.stopPropagation();
-    startX = parseInt(e.clientX-mousePosition.x);
-    startY = parseInt(e.clientY-mousePosition.y);
-    isDown = true;
-}
+toolbar.addEventListener('mousemove', (e)=> {
+    changeCursorType('default')
+});
 
+colorInput.addEventListener('change', (e) => {
+    colorDraw = colorInput.value;
+    colorInputValue.textContent = colorInput.value
+});
+
+eraserWidthInput.addEventListener('change', (e) => {
+    eraserSize = eraserWidthInput.value;
+});
+
+toolBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        selectedTool = btn.id;
+    });
+});
+
+
+canvas.addEventListener('mousedown', startDraw);
+
+// canvas.addEventListener('mouseenter', setPosition);
+
+canvas.addEventListener('mousemove', (e)=> {
+    mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
+    changeCursorType('crosshair')
+    selectAction(e)
+});
+
+canvas.addEventListener("mouseup", () => isDrawing = false);
+
+
+saveImageButton.addEventListener("click", () => {
+    const link = document.createElement("a"); 
+    link.download = `${Date.now()}.jpg`; 
+    link.href = canvas.toDataURL();
+    link.click();
+});

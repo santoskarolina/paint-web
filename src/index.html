@@ -28,17 +28,17 @@
         <div class="p-4 text-white  w-2/5" id="line__container">
             <h4 class="font-normal">Espessura do traço</h4>
             <div class="w-full flex items-center">
-                <div class="sidebar__box-lineWidth tooltip" id="lineWidthThree">
+                <div class="sidebar__box-lineWidth tooltip" id="3">
                     <span class="tooltipContent bottom topArrow">3 px</span>
                     <div id="lineWidth-One"></div>
                 </div>
 
-                <div class="sidebar__box-lineWidth tooltip" id="lineWidthFive">
+                <div class="sidebar__box-lineWidth tooltip" id="5">
                     <span class="tooltipContent bottom topArrow">5 px</span>
                     <div id="lineWidth-Two"></div>
                 </div>
 
-                <div class="sidebar__box-lineWidth tooltip" id="lineWidthTen">
+                <div class="sidebar__box-lineWidth tooltip" id="10">
                     <span class="tooltipContent bottom topArrow">10 px</span>
                     <div id="lineWidth-three"></div>
                 </div>
@@ -53,9 +53,9 @@
         <div class="p-4 text-white  w-2/5" id="shapes__container">
             <h4 class="font-normal m-0">Formas</h4>
             <div class="w-full flex items-center">
-                <div class="sidebar__box-circle-shape" id="circle-shap" onclick="drawCircle()"></div>
-                <div class="sidebar__box-rectangle-shape" onclick="drawRectangle()"></div>
-                <div class="sidebar__box-triangle-shape"></div>
+                <div class="sidebar__box-circle-shape tool" id="circle"></div>
+                <div class="sidebar__box-rectangle-shape tool" id="rectangle"></div>
+                <div class="sidebar__box-triangle-shape tool" id="triangle"></div>
             </div>
         </div>
 
@@ -65,12 +65,12 @@
 
         <div
             class="text-white flex  flex-col items-center justify-between floating__menu p-3 h-[20rem] w-[4rem] rounded-3xl mt-5 mr-4">
-            <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full rounded-xl tooltip" id="pencil" >
+            <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full rounded-xl tooltip" id="pencil" >
                 <span class="tooltipContent left leftArrow">Pincel</span>
                 <img class="h-full" src="./assets/icons/pencil-icon.png" alt="Pincel">
             </div>
 
-            <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full  tooltip" id="eraser">
+            <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full  tooltip" id="eraser">
                 <span class="tooltipContent left leftArrow">Borracha</span>
                 <img class="h-full" src="./assets/icons/eraser.png" alt="Borracha">
             </div>

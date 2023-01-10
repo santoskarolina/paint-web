@@ -1,33 +1,22 @@
-import { changeToTypeText, canvas , mousePosition, ctx, colorDraw} from './index.js'
-
-const textContainer = document.getElementById('draw-text')
-const textDrawbutton = document.getElementById('text-draw-button')
+import { prevMouseY, ctx, prevMouseX} from './index.js'
 
 
-let textPositions;
-
-textDrawbutton.addEventListener('click', drawText)
-export function drawText(){
-    changeToTypeText(true);
+export function drawCircle (e) {
+    ctx.beginPath(); 
+    let radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2));
+    ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI); 
+    ctx.fill();
 }
 
-export function setPositionOfTextArea(e){
-    textPositions = mousePosition
-    textContainer.style.top = mousePosition.y-canvas.clientHeight + 'px'
-    textContainer.style.display = 'flex'
-    textContainer.style.left = canvas.clientWidth-mousePosition.x + 'px'
+export function drawRect  (e)  {
+    ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
 }
 
-
-textContainer.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        drawTextOnCanvas()
-    }
-});
-
-export function drawTextOnCanvas(){
-    ctx.font = "30px Lato";
-    ctx.fillStyle = colorDraw;
-    ctx.textAlign = "center";
-    ctx.fillText(textContainer.value, textPositions.x, textPositions.y);
+export function drawTriangle (e)  {
+    ctx.beginPath(); 
+    ctx.moveTo(prevMouseX, prevMouseY); 
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(prevMouseX * 2 - e.offsetX, e.offsetY);
+    ctx.closePath();
+    ctx.fill()
 }
