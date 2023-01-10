@@ -15,15 +15,21 @@
   
     font-size: 1rem;
     display: none;
-    top: 3rem;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent black transparent transparent;
+    }
   }
 
   .left{
-    left: 0.4rem;
-  }
-
-  .right{
-    right:  0.4rem;
+    left: 4rem;
   }
   
   &:hover .tooltipContent {

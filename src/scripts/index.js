@@ -1,23 +1,21 @@
+export const canvas = document.getElementById("draw__canvas")
 
+export const colorInput = document.getElementById("color_input")
+export const colorInputValue = document.getElementById("color_input_value")
+export const eraserWidthInput = document.getElementById("eraser_width")
+export const mousePositionText = document.querySelector('.mouse__position')
+export const toolbar = document.getElementById('toolbar')
 
-const canvas = document.getElementById("draw__canvas")
-const colorInput = document.getElementById("color_input")
-const colorInputValue = document.getElementById("color_input_value")
-const sidebar = document.getElementById("sidebar")
-const eraserWidthInput = document.getElementById("eraser_width")
-const backgroundColorInput = document.getElementById("background_color_input")
-const mousePositionText = document.querySelector('.mouse__position')
+const lineWidthThree = document.getElementById("lineWidthTen")
+const lineWidthFive = document.getElementById("lineWidthFive")
+const lineWidthTen = document.getElementById("lineWidthTen")
 
+export var currentToolbarOption = '';
 
-var ctx = canvas.getContext('2d');
-
+export var ctx = canvas.getContext('2d');
 resize();
-ctx.fillStyle = "#fff";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 let isDrawinging = true;
-let isDrawingingACircle = false;
-let isDragingObject = false;
 let isErasing = false;
 let colorDraw = '#000';
 
@@ -29,28 +27,24 @@ var startX;
 var startY;
 var isDown=false;
 
-
 window.addEventListener('resize', resize);
+
 canvas.addEventListener('mousedown', (e) => {
     handleMouseDown(e)
     setPosition(e)
 });
+
 canvas.addEventListener('mouseenter', setPosition);
+
 canvas.addEventListener('mousemove', (e)=> {
     mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
     changeCursorType('crosshair')
     selectAction(e)
 });
 
-
-
-sidebar.addEventListener('mousemove', (e)=> {
+toolbar.addEventListener('mousemove', (e)=> {
     changeCursorType('default')
 });
-
-// floatingMenu.addEventListener('mousemove', (e)=> {
-//     changeCursorType('default')
-// });
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
@@ -61,13 +55,27 @@ eraserWidthInput.addEventListener('change', (e) => {
     eraserSize = eraserWidthInput.value;
 });
 
-backgroundColorInput.addEventListener('change', changeCanvasBackgrounColor)
-
-function changeCanvasBackgrounColor() {
-    document.getElementById('backgroundColorValue').textContent = backgroundColorInput.value
-    ctx.fillStyle = backgroundColorInput.value;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+export function addEventToLine(){
+    setTimeout(() => {
+        lineWidthThree.addEventListener('click', (e) => {
+            changeLineWidth(3);
+        });
+        
+        lineWidthFive.addEventListener('click', (e) => {
+            changeLineWidth(5);
+        })
+        
+        lineWidthTen.addEventListener('click', (e) => {
+            changeLineWidth(10);
+        });
+    }, 500)
 }
+
+// function changeCanvasBackgrounColor() {
+//     document.getElementById('backgroundColorValue').textContent = backgroundColorInput.value
+//     ctx.fillStyle = backgroundColorInput.value;
+//     ctx.fillRect(0, 0, canvas.width, canvas.height);
+// }
 
 function selectAction(e) {
     if (isErasing) {
@@ -86,7 +94,6 @@ function setPosition(e) {
 function resize() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
-    changeCanvasBackgrounColor()
 }
 
 function draw(e) {
@@ -94,17 +101,17 @@ function draw(e) {
         return
     };
 
-    ctx.beginPath(); // start
-
-    ctx.lineWidth = lineWidth;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = colorDraw;
-
-    ctx.moveTo(mousePosition.x, mousePosition.y); // start
-    setPosition(e);
-    ctx.lineTo(mousePosition.x, mousePosition.y); // end
-
-    ctx.stroke(); // draw
+        ctx.beginPath(); // start
+    
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = colorDraw;
+    
+        ctx.moveTo(mousePosition.x, mousePosition.y); // start
+        setPosition(e);
+        ctx.lineTo(mousePosition.x, mousePosition.y); // end
+    
+        ctx.stroke(); // draw
 }
 
 function drawCircle(){
@@ -126,7 +133,7 @@ function addStyleToSelectedOptionInMenu(elementId) {
     document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
 }
 
-function changeCurrentMenuOption(optionToDraw) {
+export function changeCurrentMenuOption(optionToDraw) {
     isDrawinging = optionToDraw;
     isErasing = !optionToDraw;
     const idOfTheOptionSelectedInTheMenu = optionToDraw ? "pencil" : "eraser"
@@ -146,20 +153,6 @@ function changeLineWidth(width) {
     changeCurrentMenuOption(true)
 }
 
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    changeCanvasBackgrounColor()
-}
-
-function saveDraw() {
-    var canvasDataURL = canvas.toDataURL();
-    var a = document.createElement('a');
-    a.href = canvasDataURL;
-    a.download = 'drawing';
-    a.click();
-}
-
 function changeCursorType(cursor) {
     document.body.style.cursor = cursor
 }
@@ -173,7 +166,8 @@ function selectDrawCircle(){
 function handleMouseDown(e){
     e.preventDefault();
     e.stopPropagation();
-    startX=parseInt(e.clientX-mousePosition.x);
-    startY=parseInt(e.clientY-mousePosition.y);
-    isDown=true;
+    startX = parseInt(e.clientX-mousePosition.x);
+    startY = parseInt(e.clientY-mousePosition.y);
+    isDown = true;
 }
+
