@@ -16,7 +16,7 @@
     font-size: 1rem;
     display: none;
     
-    &::after {
+    &.leftArrow::after {
       content: "";
       position: absolute;
       top: 50%;
@@ -26,11 +26,28 @@
       border-style: solid;
       border-color: transparent black transparent transparent;
     }
+
+    &.topArrow::after {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent black transparent;
+    }
+
+    &.left{
+      left: 4rem;
+    }
+
+    &.bottom{
+      top: 4rem;
+    }
   }
 
-  .left{
-    left: 4rem;
-  }
+  
   
   &:hover .tooltipContent {
     display: block;
