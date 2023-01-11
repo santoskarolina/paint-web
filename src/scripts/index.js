@@ -1,4 +1,4 @@
-import { drawCircle, drawRect, drawTriangle } from "./drawShapes"
+// import { drawCircle, drawRect, drawTriangle } from "./drawShapes"
 
 export const canvas = document.getElementById("draw__canvas")
 
@@ -11,6 +11,7 @@ export const toolbar = document.getElementById('toolbar')
 const lineWidthBox = document.querySelectorAll(".sidebar__box-lineWidth")
 const saveImageButton = document.getElementById('save-draw')
 const toolBtns = document.querySelectorAll(".tool")
+const fillShapes = document.getElementById('fill_shapes')
 
 
 export let prevMouseX, prevMouseY, snapshot;
@@ -41,6 +42,8 @@ lineWidthBox.forEach(element => {
 function selectAction(e) {
     if(!isDrawing) return;
 
+    ctx.putImageData(snapshot, 0, 0); // 
+    
     if(selectedTool === "circle"){
         drawCircle(e);
     }else if(selectedTool == "pencil" || selectedTool === "eraser"){
@@ -73,6 +76,31 @@ function addStyleToSelectedOptionInMenu(elementId) {
     }
     
     document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
+}
+
+
+
+export function drawCircle (e) {
+    ctx.beginPath(); 
+    let radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2));
+    ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI); 
+    fillShapes.checked ? ctx.fill() : ctx.stroke();
+}
+
+export function drawRect  (e)  {
+    if(!fillShapes.checked) {
+        return ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+    }
+    ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+}
+
+export function drawTriangle (e)  {
+    ctx.beginPath(); 
+    ctx.moveTo(prevMouseX, prevMouseY); 
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.lineTo(prevMouseX * 2 - e.offsetX, e.offsetY);
+    ctx.closePath();
+    fillShapes.checked ? ctx.fill() : ctx.stroke();
 }
 
 

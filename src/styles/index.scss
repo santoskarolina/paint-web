@@ -58,3 +58,13 @@ p{
     transform: matrix(1, 0, 0, 1, 458, 590);
 
 }
+
+
+#fill_shapes{
+  cursor: pointer;
+  height: 14px;
+  width: 14px;
+}
+#fill_shapes:checked ~ label{
+  color: #4A98F7;
+}

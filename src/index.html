@@ -13,9 +13,9 @@
 
         <textarea name="" id="draw-text"  class="showDrawTextContainer"></textarea>
 
-    <div class="absolute top-0 flex items-center justify-start footer__container w-full h-14 p-4" id="toolbar">
+    <div class="absolute top-0 flex items-center justify-between footer__container w-full h-14 p-4" id="toolbar">
 
-        <div class="p-4 text-white  w-2/5" id="pencil__container" >
+        <div class="p-4 text-white flex items-center">
                 <h4 class="font-normal">Cor do pincel</h4>
                 <div class="w-full flex items-center">
                     <input type="color" name="color" id="color_input" class="mr-3 h-8 text-lg">
@@ -25,7 +25,7 @@
                 </div>
         </div>
 
-        <div class="p-4 text-white  w-2/5" id="line__container">
+        <div class="p-4 text-white flex items-center">
             <h4 class="font-normal">Espessura do traço</h4>
             <div class="w-full flex items-center">
                 <div class="sidebar__box-lineWidth tooltip" id="3">
@@ -45,12 +45,12 @@
             </div>
         </div>
 
-        <div class="p-4 text-white  w-2/5" id="eraser__container">
+        <div class="p-4 text-white flex items-center" >
             <h4 class="font-normal mr-3">Tamanho da borracha</h4>
             <input type="range" value="10" name="eraser_width" id="eraser_width" min="10" max="50">
         </div>
 
-        <div class="p-4 text-white  w-2/5" id="shapes__container">
+        <div class="p-4 text-white flex items-center" >
             <h4 class="font-normal m-0">Formas</h4>
             <div class="w-full flex items-center">
                 <div class="sidebar__box-circle-shape tool" id="circle"></div>
@@ -59,9 +59,15 @@
             </div>
         </div>
 
+        <div class="p-4 text-white flex items-center" >
+            <h2>Preencher formas</h2>
+            <input type="checkbox" id="fill_shapes"> 
+        </div>
+
     </div>
 
-    <section class="flex absolute left-0 mt-10  ml-4" id="floating__menu">
+    <!-- floating menu -->
+    <section class="flex absolute left-0 mt-12  ml-4" id="floating__menu">
 
         <div
             class="text-white flex  flex-col items-center justify-between floating__menu p-3 h-[20rem] w-[4rem] rounded-3xl mt-5 mr-4">
