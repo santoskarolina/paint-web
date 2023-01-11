@@ -1,12 +1,10 @@
-// import { drawCircle, drawRect, drawTriangle } from "./drawShapes"
-
 export const canvas = document.getElementById("draw__canvas")
 
-export const colorInput = document.getElementById("color_input")
-export const colorInputValue = document.getElementById("color_input_value")
-export const eraserWidthInput = document.getElementById("eraser_width")
-export const mousePositionText = document.querySelector('.mouse__position')
-export const toolbar = document.getElementById('toolbar')
+const colorInput = document.getElementById("color_input")
+const colorInputValue = document.getElementById("color_input_value")
+const eraserWidthInput = document.getElementById("eraser_width")
+const mousePositionText = document.querySelector('.mouse__position')
+const toolbar = document.getElementById('toolbar')
 
 const lineWidthBox = document.querySelectorAll(".sidebar__box-lineWidth")
 const saveImageButton = document.getElementById('save-draw')
@@ -14,8 +12,8 @@ const toolBtns = document.querySelectorAll(".tool")
 const fillShapes = document.getElementById('fill_shapes')
 
 
-export let prevMouseX, prevMouseY, snapshot;
-export var selectedTool = "pencil"
+let prevMouseX, prevMouseY, snapshot;
+var selectedTool = "pencil"
 export var ctx = canvas.getContext('2d');
 
 window.addEventListener("load", () => {
@@ -121,8 +119,8 @@ const startDraw = (e) => {
     prevMouseY = e.offsetY; 
     ctx.beginPath();
     ctx.lineWidth = lineWidth; 
-    ctx.strokeStyle = colorInput;
-    ctx.fillStyle = colorInput;
+    ctx.strokeStyle = colorDraw;
+    ctx.fillStyle = colorDraw;
     snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 

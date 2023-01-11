@@ -11,12 +11,19 @@
 
 <body>
 
-        <textarea name="" id="draw-text"  class="showDrawTextContainer"></textarea>
+    <textarea name="" id="draw-text"  class="showDrawTextContainer"></textarea>
 
-    <div class="absolute top-0 flex items-center justify-between footer__container w-full h-14 p-4" id="toolbar">
+    <div class="absolute left-3 flex rounded-3xl mt-[10px] flex-col items-center justify-between footer__container 
+    self-center
+    w-40 h-2/3 p-4" id="toolbar">
+        
+        <div class="text-white flex flex-col items-start" >
+            <h2>Preencher formas</h2>
+            <input type="checkbox" id="fill_shapes"> 
+        </div>
 
-        <div class="p-4 text-white flex items-center">
-                <h4 class="font-normal">Cor do pincel</h4>
+        <div class="text-white flex flex-col w-full items-start">
+                <h2>Cor do pincel</h2>
                 <div class="w-full flex items-center">
                     <input type="color" name="color" id="color_input" class="mr-3 h-8 text-lg">
                     <div class="sidebar__box__content_box w-full m-0 flex items-center justify-center h-8">
@@ -25,7 +32,7 @@
                 </div>
         </div>
 
-        <div class="p-4 text-white flex items-center">
+        <div class="text-white flex flex-col  items-start">
             <h4 class="font-normal">Espessura do traço</h4>
             <div class="w-full flex items-center">
                 <div class="sidebar__box-lineWidth tooltip" id="3">
@@ -45,12 +52,12 @@
             </div>
         </div>
 
-        <div class="p-4 text-white flex items-center" >
+        <div class=" text-white flex flex-col items-start" >
             <h4 class="font-normal mr-3">Tamanho da borracha</h4>
             <input type="range" value="10" name="eraser_width" id="eraser_width" min="10" max="50">
         </div>
 
-        <div class="p-4 text-white flex items-center" >
+        <div class="text-white flex flex-col  items-start" >
             <h4 class="font-normal m-0">Formas</h4>
             <div class="w-full flex items-center">
                 <div class="sidebar__box-circle-shape tool" id="circle"></div>
@@ -59,50 +66,45 @@
             </div>
         </div>
 
-        <div class="p-4 text-white flex items-center" >
-            <h2>Preencher formas</h2>
-            <input type="checkbox" id="fill_shapes"> 
-        </div>
-
     </div>
 
     <!-- floating menu -->
-    <section class="flex absolute left-0 mt-12  ml-4" id="floating__menu">
+    <section class="flex absolute right-0 ml-4" id="floating__menu">
 
         <div
             class="text-white flex  flex-col items-center justify-between floating__menu p-3 h-[20rem] w-[4rem] rounded-3xl mt-5 mr-4">
             <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full rounded-xl tooltip" id="pencil" >
-                <span class="tooltipContent left leftArrow">Pincel</span>
+                <span class="tooltipContent right rightArrow">Pincel</span>
                 <img class="h-full" src="./assets/icons/pencil-icon.png" alt="Pincel">
             </div>
 
             <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full  tooltip" id="eraser">
-                <span class="tooltipContent left leftArrow">Borracha</span>
+                <span class="tooltipContent right rightArrow">Borracha</span>
                 <img class="h-full" src="./assets/icons/eraser.png" alt="Borracha">
             </div>
 
             <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="paint-bucket">
-                <span class="tooltipContent left leftArrow">Balde de tinta</span>
+                <span class="tooltipContent right rightArrow">Balde de tinta</span>
                 <img class="h-full" src="./assets/icons/paint-bucket.png" alt="Balde de tinta">
             </div>
 
             <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full  tooltip" id="delete-draw">
-                <span class="tooltipContent left leftArrow">Apagar desenho</span>
+                <span class="tooltipContent right rightArrow">Apagar desenho</span>
                 <img class="h-full" src="./assets/icons/botao-apagar.png" alt="Apagar desenho">
             </div>
 
-            <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="shapes">
-                <span class="tooltipContent left leftArrow">Formas</span>
-                <img class="h-full" src="./assets/icons/shapes.png" alt="Salvar desenho">
-            </div>
+                <!-- <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="shapes">
+                    <span class="tooltipContent left rightArrow">Formas</span>
+                    <img class="h-full" src="./assets/icons/shapes.png" alt="Salvar desenho">
+                </div> -->
 
             <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="text-draw-button">
-                <span class="tooltipContent left leftArrow">Texto</span>
+                <span class="tooltipContent right rightArrow">Texto</span>
                 <img class="h-full" src="./assets/icons/text.png" alt="Salvar desenho">
             </div>
 
             <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="save-draw">
-                <span class="tooltipContent left leftArrow">Salvar desenho</span>
+                <span class="tooltipContent right rightArrow">Salvar desenho</span>
                 <img class="h-full" src="./assets/icons/baixar.png" alt="Salvar desenho">
             </div>
           
@@ -118,8 +120,6 @@
             <p class="mouse__position"></p>
         </div>
     </div>
-
-
 
     <script type="module" src="./scripts/scripts.js"></script>
 </body>

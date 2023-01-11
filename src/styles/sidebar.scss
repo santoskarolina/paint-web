@@ -18,9 +18,9 @@
 }
 
 .sidebar__box-lineWidth{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 0.6rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.4rem;
     background-color: rgb(255, 255, 255);
     margin-right: 1rem;
     display: flex;
@@ -31,7 +31,7 @@
 
 #lineWidth-One, #lineWidth-Two, #lineWidth-three{
     background-color: rgb(3, 0, 0);
-    width: 2rem;
+    width: 1.2rem;
     border-radius: 0.9rem;
 }
 
@@ -48,16 +48,16 @@
 }
 
 .sidebar__box-circle-shape{
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     margin-right: 0.8rem;
     border: 3px solid #fff;
 }
 
 .sidebar__box-rectangle-shape{
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     margin-right: 0.8rem;
     border: 3px solid #fff;
 }
@@ -65,7 +65,7 @@
 .sidebar__box-triangle-shape{
     width: 0; 
     height: 0; 
-    border-left: 30px solid transparent;
-    border-right: 30px solid transparent;
-    border-bottom: 50px solid rgb(238, 233, 233);
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 30px solid rgb(238, 233, 233);
 }
