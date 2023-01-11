@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/mokkapps/changelog-generator-demo/compare/v1.1.0...v1.2.0) (2023-01-11)
+
+
+### Features
+
+* add menu option to draw a text ([2a28a98](https://github.com/mokkapps/changelog-generator-demo/commits/2a28a98a960a3b6c2bd89c6fb64881e58384ac47))
+* draw shapes ([9eaf55a](https://github.com/mokkapps/changelog-generator-demo/commits/9eaf55ac96986a5eb60c5f9ea7cdf8f2bfd52bcd))
+* file with all scripts ([c798e71](https://github.com/mokkapps/changelog-generator-demo/commits/c798e716d8b272d0486a186adadb3c35f6c0f557))
+
+
+### Bug Fixes
+
+* add tooltip to shapes img ([8738a77](https://github.com/mokkapps/changelog-generator-demo/commits/8738a77f34f027a291522bfbea4c5a887e9204e8))
+* config tailwind ([616bc50](https://github.com/mokkapps/changelog-generator-demo/commits/616bc50cdc7f83c0e3ab17c8aed5084ad1ae6c2e))
+* draw shapes ([b30cb65](https://github.com/mokkapps/changelog-generator-demo/commits/b30cb65ee51c48884c56dcc4ba7d58f729fd6e7e))
+* get id of element with line width equal to 3 ([f5b80ac](https://github.com/mokkapps/changelog-generator-demo/commits/f5b80ac3d6e3909db271fe30c964cd326231ae50))
+* javascript modules ([d4857d4](https://github.com/mokkapps/changelog-generator-demo/commits/d4857d4b68486eaa5dec3343150e25600a1eddf5))
+* menu option side and color draw ([595f7b0](https://github.com/mokkapps/changelog-generator-demo/commits/595f7b0fe7ccd24a185a9e1c2982bf3ed4a76c5f))
+* tooltip bottom position distance ([89a1cdc](https://github.com/mokkapps/changelog-generator-demo/commits/89a1cdc95b47df8ae05e1e9a875b23a1a6e8ccdf))
+* tooltip positions ([6e27806](https://github.com/mokkapps/changelog-generator-demo/commits/6e27806a28f93b45089e75c2289bb4ec21ddf66f))
+
 ## 1.1.0 (2023-01-09)
 
 
