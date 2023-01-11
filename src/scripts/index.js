@@ -6,55 +6,66 @@ const eraserWidthInput = document.getElementById("eraser_width")
 const mousePositionText = document.querySelector('.mouse__position')
 const toolbar = document.getElementById('toolbar')
 
-const lineWidthBox = document.querySelectorAll(".sidebar__box-lineWidth")
+const lineWidthElement = document.getElementById("lineWidth")
 const saveImageButton = document.getElementById('save-draw')
 const toolBtns = document.querySelectorAll(".tool")
 const fillShapes = document.getElementById('fill_shapes')
 
 
+export var ctx = canvas.getContext('2d');
 let prevMouseX, prevMouseY, snapshot;
 var selectedTool = "pencil"
-export var ctx = canvas.getContext('2d');
+let isDrawing = false;
+export let colorDraw = '#000';
+let lineWidth = 3;
+let eraserSize = 10;
+export let mousePosition = { x: 0, y: 0 };
 
 window.addEventListener("load", () => {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 });
 
-let isDrawing = false;
-export let colorDraw = '#000';
-
-let lineWidth = 3;
-let eraserSize = 10;
-export let mousePosition = { x: 0, y: 0 };
-
 window.addEventListener('resize', resize);
 
-
-lineWidthBox.forEach(element => {
-    element.addEventListener('click', (e) => {
-        lineWidth = element.id;
+    lineWidthElement.addEventListener('change', (e) => {
+        lineWidth = lineWidthElement.value;
     });
-})
 
 function selectAction(e) {
     if(!isDrawing) return;
 
     ctx.putImageData(snapshot, 0, 0); // 
-    
-    if(selectedTool === "circle"){
-        drawCircle(e);
-    }else if(selectedTool == "pencil" || selectedTool === "eraser"){
-        ctx.strokeStyle = selectedTool === "eraser" ? "#fff" : colorInput;
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke(); 
-    }else if(selectedTool === "rectangle"){
-        drawRect(e);
-    } else {
-        drawTriangle(e);
+
+    const tools = {
+        circle: () => drawCircle(e),
+        pencil: () => freeDraw(e),
+        eraser: () => deleteDraw(e),
+        rectangle: () => drawRect(e),
+        triangle: () => drawTriangle(e),
+        select_area :() => selectAreaOnCanvas(e),
+        line: () => drawLine(e)
     }
+    return tools[selectedTool]()
 }
 
+function drawLine(e){
+    ctx.moveTo(e.offsetX, e.offsetY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+}
+
+function selectAreaOnCanvas(e){
+    ctx.setLineDash([3]);
+    ctx.lineWidth = 2;
+    ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+}
+
+function freeDraw(e){
+    ctx.strokeStyle = colorInput;
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+}
 
 function setPosition(e) {
     const rect = canvas.getBoundingClientRect();
@@ -67,17 +78,6 @@ function resize() {
     ctx.canvas.height = window.innerHeight;
 }
 
-function addStyleToSelectedOptionInMenu(elementId) {
-    const thereIsAnExistingClass = document.querySelector(".floating__menu-box-select")
-    if(thereIsAnExistingClass){
-        thereIsAnExistingClass.classList.remove('floating__menu-box-select')
-    }
-    
-    document.querySelector(`#${elementId}`).classList.add('floating__menu-box-select')
-}
-
-
-
 export function drawCircle (e) {
     ctx.beginPath(); 
     let radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2));
@@ -87,10 +87,19 @@ export function drawCircle (e) {
 
 export function drawRect  (e)  {
     if(!fillShapes.checked) {
-        return ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+        return drawNotFilledRect(e)
     }
-    ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+    drawFilledRect(e)
 }
+
+ function drawNotFilledRect(e){
+    ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+ }
+
+ function drawFilledRect(e){
+    ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+ }
+
 
 export function drawTriangle (e)  {
     ctx.beginPath(); 
@@ -101,12 +110,11 @@ export function drawTriangle (e)  {
     fillShapes.checked ? ctx.fill() : ctx.stroke();
 }
 
-
-function deleteDraw(event) {
-    if (event.buttons !== 1) return
-
-    setPosition(event)
-    ctx.clearRect(mousePosition.x, mousePosition.y, eraserSize, eraserSize);
+function deleteDraw(e) {
+    ctx.lineWidth = eraserSize; 
+    ctx.strokeStyle = "#fff";
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke(); 
 }
 
 function changeCursorType(cursor) {
@@ -118,6 +126,7 @@ const startDraw = (e) => {
     prevMouseX = e.offsetX; 
     prevMouseY = e.offsetY; 
     ctx.beginPath();
+    ctx.setLineDash([0]);
     ctx.lineWidth = lineWidth; 
     ctx.strokeStyle = colorDraw;
     ctx.fillStyle = colorDraw;
@@ -143,19 +152,16 @@ toolBtns.forEach(btn => {
     });
 });
 
-
-canvas.addEventListener('mousedown', startDraw);
-
 // canvas.addEventListener('mouseenter', setPosition);
+canvas.addEventListener('mousedown', startDraw);
+canvas.addEventListener('mousemove', handleMouseMove);
+canvas.addEventListener("mouseup", () => isDrawing = false);
 
-canvas.addEventListener('mousemove', (e)=> {
+function handleMouseMove(e){
     mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
     changeCursorType('crosshair')
     selectAction(e)
-});
-
-canvas.addEventListener("mouseup", () => isDrawing = false);
-
+}
 
 saveImageButton.addEventListener("click", () => {
     const link = document.createElement("a"); 

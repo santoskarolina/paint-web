@@ -19,16 +19,15 @@
 
     <textarea name="" id="draw-text"  class="showDrawTextContainer"></textarea>
 
-    <div class="absolute left-3 flex rounded-3xl flex-col items-center justify-between footer__container 
-    self-center
-    w-40 h-2/3 p-4 mt-10" id="toolbar">
+    <div class="absolute left-3 flex rounded-3xl flex-col items-center justify-between sidebar 
+    self-center !w-[12rem] !h-[20rem] p-4 mt-20" id="toolbar">
         
-        <div class="text-white flex flex-col items-start" >
-            <h2>Preencher formas</h2>
-            <input type="checkbox" id="fill_shapes"> 
+        <div class="text-black flex  justify-start w-full items-center" >
+            <h2 class="m-0 p-0">Preencher formas</h2>
+            <input type="checkbox" id="fill_shapes" class="ml-2"> 
         </div>
 
-        <div class="text-white flex flex-col w-full items-start">
+        <div class="text-black flex flex-col w-full items-start">
                 <h2>Cor do pincel</h2>
                 <div class="w-full flex items-center">
                     <input type="color" name="color" id="color_input" class="mr-3 h-8 text-lg">
@@ -38,42 +37,34 @@
                 </div>
         </div>
 
-        <div class="text-white flex flex-col  items-start">
+        <div class="text-black w-full flex flex-col  tems-start">
             <h4 class="font-normal">Espessura do traço</h4>
-            <div class="w-full flex items-center">
-                <div class="sidebar__box-lineWidth tooltip" id="3">
-                    <span class="tooltipContent bottom topArrow">3 px</span>
-                    <div id="lineWidth-One"></div>
-                </div>
-
-                <div class="sidebar__box-lineWidth tooltip" id="5">
-                    <span class="tooltipContent bottom topArrow">5 px</span>
-                    <div id="lineWidth-Two"></div>
-                </div>
-
-                <div class="sidebar__box-lineWidth tooltip" id="10">
-                    <span class="tooltipContent bottom topArrow">10 px</span>
-                    <div id="lineWidth-three"></div>
-                </div>
-            </div>
+            <input type="range" value="3" name="lineWidth" id="lineWidth" min="3" max="10" class="w-full">
         </div>
 
-        <div class=" text-white flex flex-col items-start" >
-            <h4 class="font-normal mr-3">Tamanho da borracha</h4>
-            <input type="range" value="10" name="eraser_width" id="eraser_width" min="10" max="50">
+        <div class=" text-black  w-full flex flex-col items-start" >
+            <h4 class="font-normal">Tamanho da borracha</h4>
+            <input type="range" value="10" name="eraser_width" id="eraser_width" min="10" max="50" class="w-full">
         </div>
 
-        <div class="text-white flex flex-col  items-start" >
+        <div class="text-black w-full flex flex-col  items-start" >
             <h4 class="font-normal m-0">Formas</h4>
             <div class="w-full flex items-center">
-                <div class="sidebar__box-circle-shape tool tooltip" id="circle">
+                <div class="sidebar__box tool tooltip" id="circle">
                     <span class="tooltipContent bottom topArrow">Circulo</span>
+                    <img src="./assets/icons/shape-circle.png" alt="" srcset="">
                 </div>
-                <div class="sidebar__box-rectangle-shape tool tooltip" id="rectangle">
+                <div class="sidebar__box tool tooltip" id="rectangle">
                     <span class="tooltipContent bottom topArrow">Retangulo</span>
+                    <img src="./assets/icons/shape-rectangle.png" alt="" srcset="">
                 </div>
-                <div class="sidebar__box-triangle-shape tool tooltip" id="triangle">
+                <div class="sidebar__box tool tooltip" id="triangle">
                     <span class="tooltipContent bottom topArrow">Triangulo</span>
+                    <img src="./assets/icons/shape-triangle.png" alt="" srcset="">
+                </div>
+                <div class="sidebar__box tool tooltip" id="line">
+                    <span class="tooltipContent bottom topArrow">Linha</span>
+                    <img src="./assets/icons/shape-line.png" alt="" srcset="">
                 </div>
             </div>
         </div>
@@ -105,10 +96,10 @@
                 <img class="h-full" src="./assets/icons/botao-apagar.png" alt="Apagar desenho">
             </div>
 
-                <!-- <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="shapes">
-                    <span class="tooltipContent left rightArrow">Formas</span>
-                    <img class="h-full" src="./assets/icons/shapes.png" alt="Salvar desenho">
-                </div> -->
+                <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full tooltip" id="select_area">
+                    <span class="tooltipContent right rightArrow">Selecionar</span>
+                    <img class="h-full" src="./assets/icons/select-area.png" alt="Salvar desenho">
+                </div>
 
             <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="text-draw-button">
                 <span class="tooltipContent right rightArrow">Texto</span>

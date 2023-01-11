@@ -1,5 +1,5 @@
 .sidebar{
-    background-color: #333;
+    background-color: rgb(238, 238, 238);
     box-shadow: 0px 0px 10px rgba(30, 30, 30, 0.7);
     width: 14rem;
     z-index: 1000;
@@ -47,25 +47,10 @@
     height: 0.5rem;
 }
 
-.sidebar__box-circle-shape{
+.sidebar__box{
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
     margin-right: 0.8rem;
-    border: 3px solid #fff;
 }
 
-.sidebar__box-rectangle-shape{
-    width: 2rem;
-    height: 2rem;
-    margin-right: 0.8rem;
-    border: 3px solid #fff;
-}
-
-.sidebar__box-triangle-shape{
-    width: 0; 
-    height: 0; 
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-    border-bottom: 30px solid rgb(238, 233, 233);
-}
