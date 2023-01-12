@@ -11,7 +11,6 @@ const saveImageButton = document.getElementById('save-draw')
 const toolBtns = document.querySelectorAll(".tool")
 const fillShapes = document.getElementById('fill_shapes')
 
-
 export var ctx = canvas.getContext('2d');
 let prevMouseX, prevMouseY, snapshot;
 var selectedTool = "pencil"
@@ -28,9 +27,9 @@ window.addEventListener("load", () => {
 
 window.addEventListener('resize', resize);
 
-    lineWidthElement.addEventListener('change', (e) => {
-        lineWidth = lineWidthElement.value;
-    });
+lineWidthElement.addEventListener('change', (e) => {
+    lineWidth = lineWidthElement.value;
+});
 
 function selectAction(e) {
     if(!isDrawing) return;
@@ -102,7 +101,6 @@ export function drawRect  (e)  {
     ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
  }
 
-
 export function drawTriangle (e)  {
     ctx.beginPath(); 
     ctx.moveTo(prevMouseX, prevMouseY); 
@@ -156,13 +154,19 @@ toolBtns.forEach(btn => {
     });
 });
 
+function handleClickOnCanvas(e){
+    console.log(snapshot)
+}
+
 // canvas.addEventListener('mouseenter', setPosition);
 canvas.addEventListener('mousedown', startDraw);
 canvas.addEventListener('mousemove', handleMouseMove);
 canvas.addEventListener("mouseup", () => isDrawing = false);
+canvas.addEventListener("dblclick", handleClickOnCanvas);
 
 function handleMouseMove(e){
     mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
+    document.querySelector('.canvas_size').textContent = `${canvas.width} x ${canvas.height}`
     changeCursorType('crosshair')
     selectAction(e)
 }
