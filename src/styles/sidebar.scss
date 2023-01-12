@@ -17,36 +17,6 @@
     border: 2px solid rgb(80, 76, 76);
 }
 
-.sidebar__box-lineWidth{
-    width: 2rem;
-    height: 2rem;
-    border-radius: 0.4rem;
-    background-color: rgb(255, 255, 255);
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-#lineWidth-One, #lineWidth-Two, #lineWidth-three{
-    background-color: rgb(3, 0, 0);
-    width: 1.2rem;
-    border-radius: 0.9rem;
-}
-
-#lineWidth-One{
-    height: 0.1rem;
-}
-
-#lineWidth-Two{
-    height: 0.3rem;
-}
-
-#lineWidth-three{
-    height: 0.5rem;
-}
-
 .sidebar__box{
     width: 2rem;
     height: 2rem;
@@ -54,3 +24,6 @@
     margin-right: 0.8rem;
 }
 
+.toolActive{
+    background-color: rgb(176, 176, 207);
+}

@@ -148,7 +148,9 @@ eraserWidthInput.addEventListener('change', (e) => {
 
 toolBtns.forEach(btn => {
     btn.addEventListener("click", () => {
+        document.querySelector('.options .toolActive').classList.remove('toolActive')
         selectedTool = btn.id;
+        btn.classList.add('toolActive')
     });
 });
 

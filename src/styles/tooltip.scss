@@ -26,24 +26,8 @@
       border-style: solid;
       border-color: transparent transparent transparent black;
     }
-
-    &.topArrow::after {
-      content: "";
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-      border-color: transparent transparent black transparent;
-    }
-
     &.right{
       right: 4rem;
-    }
-
-    &.bottom{
-      top: 3rem;
     }
   }
 

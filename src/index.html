@@ -20,12 +20,36 @@
     <textarea name="" id="draw-text"  class="showDrawTextContainer"></textarea>
 
     <div class="absolute left-3 flex rounded-3xl flex-col items-center justify-between sidebar 
-    self-center !w-[12rem] !h-[20rem] p-4 mt-20" id="toolbar">
-        
-        <div class="text-black flex  justify-start w-full items-center" >
-            <h2 class="m-0 p-0">Preencher formas</h2>
-            <input type="checkbox" id="fill_shapes" class="ml-2"> 
+    self-center !w-[12rem] !h-[26rem] p-4 mt-20" id="toolbar">
+
+    <div class="text-black w-full flex flex-col mb-2 items-start">
+        <h4 class="font-normal m-0">Formas</h4>
+        <div class="w-full ml-2 flex flex-col items-start justify-start options">
+
+            <div class="flex w-full tool  mb-2 rounded-2xl p-1" id="circle">
+                <img src="./assets/icons/shape-circle.png" alt="Circulo"  class="h-6">
+                <p class="!ml-2">Circulo</p>
+            </div>
+            <div class="flex w-full tool  mb-2 rounded-2xl p-1" id="rectangle">
+                <img src="./assets/icons/shape-rectangle.png" alt="Retangulo"  class="h-6">
+                <p class="!ml-2">Retangulo</p>
+            </div>
+            <div class="flex w-full tool  mb-2 rounded-2xl p-1" id="triangle">
+                <img src="./assets/icons/shape-triangle.png" alt="Triangulo"  class="h-6">
+                <p class="!ml-2">Triangulo</p>
+            </div>
+            <div class="flex w-full tool  mb-2 rounded-2xl p-1" id="line">
+                <img src="./assets/icons/shape-line.png" alt="Linha" class="h-6">
+                <p class="!ml-2">Linha</p>
+            </div>
+
+            <div class="text-black flex p-1 justify-start w-full items-center" >
+                <input type="checkbox" id="fill_shapes"> 
+                <h2 class="ml-3 p-0">Preencher formas</h2>
+            </div>
+
         </div>
+    </div>
 
         <div class="text-black flex flex-col w-full items-start">
                 <h2>Cor do pincel</h2>
@@ -46,62 +70,38 @@
             <h4 class="font-normal">Tamanho da borracha</h4>
             <input type="range" value="10" name="eraser_width" id="eraser_width" min="10" max="50" class="w-full">
         </div>
-
-        <div class="text-black w-full flex flex-col  items-start" >
-            <h4 class="font-normal m-0">Formas</h4>
-            <div class="w-full flex items-center">
-                <div class="sidebar__box tool tooltip" id="circle">
-                    <span class="tooltipContent bottom topArrow">Circulo</span>
-                    <img src="./assets/icons/shape-circle.png" alt="" srcset="">
-                </div>
-                <div class="sidebar__box tool tooltip" id="rectangle">
-                    <span class="tooltipContent bottom topArrow">Retangulo</span>
-                    <img src="./assets/icons/shape-rectangle.png" alt="" srcset="">
-                </div>
-                <div class="sidebar__box tool tooltip" id="triangle">
-                    <span class="tooltipContent bottom topArrow">Triangulo</span>
-                    <img src="./assets/icons/shape-triangle.png" alt="" srcset="">
-                </div>
-                <div class="sidebar__box tool tooltip" id="line">
-                    <span class="tooltipContent bottom topArrow">Linha</span>
-                    <img src="./assets/icons/shape-line.png" alt="" srcset="">
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- floating menu -->
     <section class="flex absolute right-0 mt-10 ml-4" id="floating__menu">
 
-        <div
-            class="text-white flex  flex-col items-center justify-between floating__menu p-3 h-[20rem] w-[4rem] rounded-3xl mt-5 mr-4">
-            <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full rounded-xl tooltip" id="pencil" >
+        <div class="text-white options flex  flex-col items-center justify-between floating__menu p-3 h-[20rem] w-[4rem] rounded-3xl mt-5 mr-4">
+            <div class="toolActive cursor-pointer h-[2rem] tool flex items-center justify-center w-full rounded-xl tooltip" id="pencil" >
                 <span class="tooltipContent right rightArrow">Pincel</span>
                 <img class="h-full" src="./assets/icons/pencil-icon.png" alt="Pincel">
             </div>
 
-            <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full  tooltip" id="eraser">
+            <div class="cursor-pointer h-[2rem] tool flex items-center rounded-xl justify-center w-full tool tooltip" id="eraser">
                 <span class="tooltipContent right rightArrow">Borracha</span>
                 <img class="h-full" src="./assets/icons/eraser.png" alt="Borracha">
             </div>
 
-            <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="paint-bucket">
+            <div class="cursor-pointer h-[2rem] flex items-center rounded-xl justify-center w-full tooltip" id="paint-bucket">
                 <span class="tooltipContent right rightArrow">Balde de tinta</span>
                 <img class="h-full" src="./assets/icons/paint-bucket.png" alt="Balde de tinta">
             </div>
 
-            <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full  tooltip" id="delete-draw">
+            <div class="cursor-pointer h-[2rem] flex items-center rounded-xl justify-center w-full  tooltip" id="delete-draw">
                 <span class="tooltipContent right rightArrow">Apagar desenho</span>
                 <img class="h-full" src="./assets/icons/botao-apagar.png" alt="Apagar desenho">
             </div>
 
-                <div class="cursor-pointer h-[2rem] tool flex items-center justify-center w-full tooltip" id="select_area">
+                <div class="cursor-pointer h-[2rem] tool flex items-center rounded-xl justify-center w-full tooltip" id="select_area">
                     <span class="tooltipContent right rightArrow">Selecionar</span>
                     <img class="h-full" src="./assets/icons/select-area.png" alt="Salvar desenho">
                 </div>
 
-            <div class="cursor-pointer h-[2rem] flex items-center justify-center w-full tooltip" id="text-draw-button">
+            <div class="cursor-pointer h-[2rem] flex items-center  rounded-xl ustify-center w-full tooltip" id="text-draw-button">
                 <span class="tooltipContent right rightArrow">Texto</span>
                 <img class="h-full" src="./assets/icons/text.png" alt="Salvar desenho">
             </div>
