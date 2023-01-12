@@ -77,6 +77,8 @@ function setPosition(e) {
 function resize() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
+    document.querySelector('.canvas_size').textContent = `${canvas.width} x ${canvas.height}`
+    ctx.putImageData(snapshot, 0, 0); // 
 }
 
 export function drawCircle (e) {
