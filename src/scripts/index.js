@@ -23,6 +23,7 @@ export let mousePosition = { x: 0, y: 0 };
 window.addEventListener("load", () => {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
+    canvasBackgroundColor()
 });
 
 window.addEventListener('resize', resize);
@@ -30,6 +31,11 @@ window.addEventListener('resize', resize);
 lineWidthElement.addEventListener('change', (e) => {
     lineWidth = lineWidthElement.value;
 });
+
+function canvasBackgroundColor(){
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
 
 function selectAction(e) {
     if(!isDrawing) return;
@@ -78,7 +84,6 @@ function resize() {
     ctx.canvas.width = window.innerWidth;
     ctx.canvas.height = window.innerHeight;
     document.querySelector('.canvas_size').textContent = `${canvas.width} x ${canvas.height}`
-    ctx.putImageData(snapshot, 0, 0); // 
 }
 
 export function drawCircle (e) {
