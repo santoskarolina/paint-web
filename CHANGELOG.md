@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/mokkapps/changelog-generator-demo/compare/v1.2.0...v1.3.0) (2023-01-12)
+
+
+### Features
+
+* add canvas size on footer ([5ffd9c3](https://github.com/mokkapps/changelog-generator-demo/commits/5ffd9c39c91bd1e26bf7780725d3e059e06e1efd))
+
+
+### Bug Fixes
+
+* add style to active option ([a2cf2b5](https://github.com/mokkapps/changelog-generator-demo/commits/a2cf2b5d3352595af8f6749c7344e642234e81a2))
+* canvas resize ([aa7a301](https://github.com/mokkapps/changelog-generator-demo/commits/aa7a301060e477fe83bf15d0b5fdd118730c3242))
+* draw line ([0d2566c](https://github.com/mokkapps/changelog-generator-demo/commits/0d2566caf44f2d07e6d2dfd514de379a583499b2))
+* resize canvas ([106facf](https://github.com/mokkapps/changelog-generator-demo/commits/106facfab9130f41fe5cbdf118b68309bdb6b236))
+* sidebar and add icons ([904a0ab](https://github.com/mokkapps/changelog-generator-demo/commits/904a0abda424adc8b77397d013192887b80e1d61))
+
 ## [1.2.0](https://github.com/mokkapps/changelog-generator-demo/compare/v1.1.0...v1.2.0) (2023-01-11)
 
 
