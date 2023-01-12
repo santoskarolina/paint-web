@@ -50,9 +50,11 @@ function selectAction(e) {
 }
 
 function drawLine(e){
-    ctx.moveTo(e.offsetX, e.offsetY);
+    ctx.beginPath(); 
+    ctx.moveTo(prevMouseX, prevMouseY); 
     ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
+    ctx.closePath();
+    ctx.stroke()
 }
 
 function selectAreaOnCanvas(e){
