@@ -12,7 +12,7 @@ const colorInput = document.getElementById("color_input")
 const colorInputValue = document.getElementById("color_input_value")
 const eraserWidthInput = document.getElementById("eraser_width")
 const mousePositionText = document.querySelector('.mouse__position')
-const toolbar = document.getElementById('toolbar')
+// const toolbar = document.getElementById('toolbar')
 
 const lineWidthElement = document.getElementById("lineWidth")
 const saveImageButton = document.getElementById('save-draw')
@@ -132,9 +132,9 @@ const startDraw = (e) => {
     snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 
-toolbar.addEventListener('mousemove', (e)=> {
-    changeCursorType('default')
-});
+// toolbar.addEventListener('mousemove', (e)=> {
+//     changeCursorType('default')
+// });
 
 colorInput.addEventListener('change', (e) => {
     colorDraw = colorInput.value;
