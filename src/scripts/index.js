@@ -1,3 +1,11 @@
+import { CircleShape } from "./shapes/circle"
+import { EllipseShape } from "./shapes/ellipse"
+import { Eraser } from "./shapes/eraser"
+import { LineShape } from "./shapes/line"
+import { PencilShape } from "./shapes/pencil"
+import { RectangleShape } from "./shapes/rectangle"
+import { TringleShape } from "./shapes/triangle"
+
 export const canvas = document.getElementById("draw__canvas")
 
 const colorInput = document.getElementById("color_input")
@@ -39,39 +47,56 @@ function canvasBackgroundColor(){
 
 function selectAction(e) {
     if(!isDrawing) return;
-
     ctx.putImageData(snapshot, 0, 0); // 
 
     const tools = {
         circle: () => drawCircle(e),
         pencil: () => freeDraw(e),
-        eraser: () => deleteDraw(e),
-        rectangle: () => drawRect(e),
+        eraser: () => eraser(e),
+        rectangle: () => drawRectangle(e),
         triangle: () => drawTriangle(e),
         select_area :() => selectAreaOnCanvas(e),
-        line: () => drawLine(e)
+        line: () => drawLine(e),
+        ellipse: () => drawEllipse(e),
     }
     return tools[selectedTool]()
 }
 
 function drawLine(e){
-    ctx.beginPath(); 
-    ctx.moveTo(prevMouseX, prevMouseY); 
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.closePath();
-    ctx.stroke()
+    let line  = new LineShape({X: prevMouseX, Y: prevMouseY},  { X: e.offsetX, Y: e.offsetY });
+    line.draw(ctx);
+}
+
+function freeDraw(e){
+    let pencil = new PencilShape({ X: e.offsetX, Y: e.offsetY }, colorInput);
+    pencil.draw(ctx);
+}
+
+function drawEllipse(e){
+    let ellipse = new EllipseShape({x: prevMouseX, y: prevMouseY},  { x: e.offsetX, y: e.offsetY },
+        colorDraw,fillShapes.checked);
+    ellipse.draw(ctx);
+}
+
+function drawCircle (e) {
+    let circle = new CircleShape({X: prevMouseX, Y: prevMouseY},  { X: e.offsetX, Y: e.offsetY }, colorDraw, fillShapes.checked);
+    circle.draw(ctx);
+}
+
+function drawRectangle  (e)  {
+    let rectangle = new RectangleShape({X: prevMouseX, Y: prevMouseY},  { X: e.offsetX, Y: e.offsetY }, fillShapes.checked);
+    rectangle.draw(ctx);
+}
+
+function drawTriangle (e)  {
+    let triangle = new TringleShape({X: prevMouseX, Y: prevMouseY},  { X: e.offsetX, Y: e.offsetY }, fillShapes.checked);
+    triangle.draw(ctx);
 }
 
 function selectAreaOnCanvas(e){
     ctx.setLineDash([3]);
     ctx.lineWidth = 2;
     ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
-}
-
-function freeDraw(e){
-    ctx.strokeStyle = colorInput;
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
 }
 
 function setPosition(e) {
@@ -86,42 +111,9 @@ function resize() {
     document.querySelector('.canvas_size').textContent = `${canvas.width} x ${canvas.height}`
 }
 
-export function drawCircle (e) {
-    ctx.beginPath(); 
-    let radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2));
-    ctx.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI); 
-    fillShapes.checked ? ctx.fill() : ctx.stroke();
-}
-
-export function drawRect  (e)  {
-    if(!fillShapes.checked) {
-        return drawNotFilledRect(e)
-    }
-    drawFilledRect(e)
-}
-
- function drawNotFilledRect(e){
-    ctx.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
- }
-
- function drawFilledRect(e){
-    ctx.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
- }
-
-export function drawTriangle (e)  {
-    ctx.beginPath(); 
-    ctx.moveTo(prevMouseX, prevMouseY); 
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.lineTo(prevMouseX * 2 - e.offsetX, e.offsetY);
-    ctx.closePath();
-    fillShapes.checked ? ctx.fill() : ctx.stroke();
-}
-
-function deleteDraw(e) {
-    ctx.lineWidth = eraserSize; 
-    ctx.strokeStyle = "#fff";
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke(); 
+function eraser(e) {
+    let eraser = new Eraser({X: e.offsetX, Y: e.offsetY}, eraserSize);
+    eraser.draw(ctx);
 }
 
 function changeCursorType(cursor) {
