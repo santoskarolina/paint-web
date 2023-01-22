@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.1](https://github.com/mokkapps/changelog-generator-demo/compare/v1.3.0...v1.3.1) (2023-01-22)
+
+
+### Bug Fixes
+
+* classes for the shapes ([7ad5cb1](https://github.com/mokkapps/changelog-generator-demo/commits/7ad5cb13a6b1bae0e8f9b19accabe184f4a990f7))
+* hiding unimplemented functions ([00e5831](https://github.com/mokkapps/changelog-generator-demo/commits/00e5831384417d6d3c149d8e706927f0d4bb7e2a))
+* vite build script ([b519a34](https://github.com/mokkapps/changelog-generator-demo/commits/b519a3455d2c62958a39a704ee507fe0c234f016))
+
 ## [1.3.0](https://github.com/mokkapps/changelog-generator-demo/compare/v1.2.0...v1.3.0) (2023-01-12)
 
 
