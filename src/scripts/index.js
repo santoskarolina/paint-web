@@ -153,11 +153,14 @@ function handleClickOnCanvas(e){
     console.log(snapshot)
 }
 
+function drangAndDropDraw(){
+    
+}
+
 // canvas.addEventListener('mouseenter', setPosition);
-canvas.addEventListener('mousedown', startDraw);
-canvas.addEventListener('mousemove', handleMouseMove);
-canvas.addEventListener("mouseup", () => isDrawing = false);
-canvas.addEventListener("dblclick", handleClickOnCanvas);
+canvas.onmousedown = startDraw;
+canvas.onmousemove = handleMouseMove;
+canvas.onmouseup =  () => isDrawing = false;
 
 function handleMouseMove(e){
     mousePositionText.textContent = `${e.clientX}, ${ e.clientY}`
